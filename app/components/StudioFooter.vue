@@ -163,18 +163,18 @@
   .weight(@bold);
 
   position: relative;
-  width: 400px;
-  height: 200px;
+  width: 130px;
+  height: 40px;
   background-color: var(--warning);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20% 20% 20% 20%;
   box-sizing: content-box;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+  border-radius: 15% 15% 15% 15%;
 
   span {
-    font-size: 100px;
+    font-size: 30px;
     color: var(--white);
   }
 
