@@ -38,7 +38,7 @@
     "commit": "commit",
     "postinstall": "node ./scripts/postinstall.js",
     "tail-obs-logs": "yarn install --cwd bin && node bin/tail-obs-logs.js",
-    "generate-agreement": "cat BASEAGREEMENT > AGREEMENT && yarn licenses generate-disclaimer --ignore-platform >> AGREEMENT",
+    "generate-agreement": "type BASEAGREEMENT > AGREEMENT && yarn licenses generate-disclaimer --ignore-platform >> AGREEMENT",
     "generate-agreement:mac": "cat BASEAGREEMENT > license_en.txt && yarn licenses generate-disclaimer --ignore-platform >> license_en.txt"
   },
   "prettier": {
