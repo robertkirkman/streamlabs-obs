@@ -1,5 +1,5 @@
 import React, { ReactNode, CSSProperties } from 'react';
-import { useOnCreate, useVuex } from '../hooks';
+import { useVuex } from '../hooks';
 import { Services } from '../service-provider';
 import { getOS, OS } from '../../util/operating-systems';
 import cx from 'classnames';
@@ -43,7 +43,7 @@ export function ModalLayout(p: TProps) {
   const { WindowsService, CustomizationService } = Services;
 
   // define a vuex state
-  const v = useVuex(() => ({ currentTheme: CustomizationService.currentTheme }));
+  const v = useVuex(() => ({ currentTheme: CustomizationService.currentTheme }), false);
 
   // define a close method for the modal
   function close() {
@@ -69,7 +69,7 @@ export function ModalLayout(p: TProps) {
 
   return (
     <div className={cx('ant-modal-content', v.currentTheme)} style={wrapperStyles}>
-      <div style={fixedStyles}>{p.fixedChild}</div>
+      {p.fixedChild && <div style={fixedStyles}>{p.fixedChild}</div>}
       <div className="ant-modal-body" style={bodyStyles}>
         {p.children}
       </div>

@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Form as AntForm } from 'antd';
 import { FormInstance, FormProps, FormItemProps } from 'antd/lib/form';
+import { TInputLayout } from './inputs';
 
 type TFormContext = {
   antForm: FormInstance;
-  nowrap?: boolean;
+  layout?: TInputLayout;
 } & Pick<FormItemProps, 'labelCol' | 'wrapperCol'>;
 
 /**
@@ -15,26 +16,22 @@ export const FormContext = React.createContext<TFormContext | null>(null);
 /**
  * Form handle validations and sets the layout for the input components
  */
-export default React.memo(function Form(p: FormProps) {
+export default React.memo(function Form(p: FormProps & { disabled?: boolean }) {
   const context = useContext(FormContext);
   const [antForm] = AntForm.useForm(context?.antForm || p.form);
-  const [contextValue] = useState(() => {
-    const layouts = {
-      horizontal: {
-        labelCol: { span: 8 },
-        wrapperCol: { span: 16 },
-      },
-      vertical: {
-        labelCol: { span: 24 },
-        wrapperCol: { span: 24 },
-      },
-    };
-    const layout = layouts[p.layout || 'horizontal'];
+  const [contextValue, setContextValue] = useState(() => {
+    // set default layout to horizontal
+    const layout = p.layout || 'horizontal';
     return {
-      ...layout,
+      layout,
       antForm,
     };
   });
+
+  useEffect(() => {
+    const layout = p.layout || 'horizontal';
+    setContextValue(prevContext => ({ ...prevContext, layout }));
+  }, [p.layout]);
 
   // data attributes helps to find this form in DOM in tests
   const dataAttrs = {
@@ -51,7 +48,7 @@ export default React.memo(function Form(p: FormProps) {
       ) : (
         // there is no AntForm in ancestor, this is a root form
         // create the AntForm container for children
-        <AntForm {...dataAttrs} {...contextValue.layout} {...p} form={antForm}>
+        <AntForm {...dataAttrs} {...p} form={antForm}>
           {p.children}
         </AntForm>
       )}

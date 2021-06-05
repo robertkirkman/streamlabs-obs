@@ -82,6 +82,7 @@ const platformToServiceNameMap: { [key in TPlatform]: string } = {
   twitch: 'Twitch',
   youtube: 'YouTube / YouTube Gaming',
   facebook: 'Facebook Live',
+  tiktok: 'Custom',
 };
 
 /**
@@ -186,6 +187,7 @@ export class StreamSettingsService extends PersistentStatefulService<IStreamSett
       );
       patch.platforms = platforms as ISavedGoLiveSettings['platforms'];
     }
+    console.log('update settings', settingsPatch);
     this.setSettings({
       goLiveSettings: { ...this.state.goLiveSettings, ...settingsPatch } as IGoLiveSettings,
     });
