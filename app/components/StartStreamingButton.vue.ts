@@ -121,7 +121,7 @@ export default class StartStreamingButton extends Vue {
       return $t('Reconnecting');
     }
 
-    return $t('Go Live');
+    return $t('Stream');
   }
 
   getIsRedButton() {

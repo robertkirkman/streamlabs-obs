@@ -34,7 +34,7 @@
           @click="toggleRecording"
           :class="{ active: streamingService.isRecording }"
         >
-          <span>REC</span>
+          <span>RECORD</span>
         </button>
       </div>
       <div class="nav-item" v-if="replayBufferEnabled && replayBufferOffline">
@@ -163,27 +163,31 @@
   .weight(@bold);
 
   position: relative;
-  width: 30px;
-  height: 30px;
-  background-color: var(--button);
+  width: 130px;
+  height: 40px;
+  background-color: var(--warning);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 100%;
   box-sizing: content-box;
-  letter-spacing: 0.2px;
+  letter-spacing: 1px;
+  border-radius: 15% 15% 15% 15%;
 
   span {
-    font-size: 10px;
-    color: var(--warning);
+    font-size: 30px;
+    color: var(--white);
   }
 
   &:hover {
-    background-color: var(--button-hover);
+    background-color: var(--warning);
+
+    span {
+      color: var(--white);
+    }
   }
 
   &.active {
-    animation: pulse 2.5s linear infinite;
+    animation: pulse 0.5s linear infinite;
     background-color: var(--warning);
 
     span {
@@ -193,6 +197,7 @@
 
   &:focus {
     outline: none;
+    background-color: var(--warning);
   }
 }
 

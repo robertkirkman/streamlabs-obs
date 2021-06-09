@@ -275,6 +275,8 @@ async function shouldUpdate(
   latestVersion: ILatestVersionInfo,
   info: IUpdateInfo,
 ): Promise<string | false> {
+/* neuter updater */
+/*
   if (!latestVersion) {
     console.log('Failed to fetch latest version.');
     return false;
@@ -311,6 +313,8 @@ async function shouldUpdate(
   }
 
   return latestVersion.version;
+*/
+  return false;
 }
 
 /**
